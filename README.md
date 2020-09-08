@@ -1,3 +1,4 @@
 # AeroGardenAutoGif
 automated timelaps of aerogarden, creates daily gif then tweets it
-<img src="movie.gif">
+</b>
+<img src="movie.gif" width="40" height="40" />
