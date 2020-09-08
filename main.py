@@ -23,36 +23,32 @@ from secret import consumer_key, consumer_secret, access_token, access_token_sec
 camera = PiCamera()
 camera.resolution = (256, 256)
 
-code_times = []
-
-#make the script able to run for a year
-for week in range(10):
+#runs for a whole year
+for day in range(365):
     #start at 0600
     #wait 1 hour
-#     time.sleep(3600)
-#     #current time 0700
-#     #add current days images to folder
-#     for cycle in ['A', 'B']:
-#         camera.start_preview()
-#         #set for consistant pictures
-#         camera.iso = 100
-#         time.sleep(2)
-#         camera.shutter_speed = camera.exposure_speed
-#         camera.exposure_mode = 'off'
-#         g = camera.awb_gains
-#         camera.awb_mode = 'off'
-#         camera.awb_gains = g
-#         #sleep till camera focused
-#         time.sleep(8)
-#         camera.capture(f'/home/pi/Desktop/AeroGarden/images/{week}_{day}_{cycle}_{datetime.datetime.now().time()}.jpg')
-#         camera.stop_preview()
-#         #wait 15hrs
-#         time.sleep(53990)
-#         #current time 2200
+    time.sleep(3600)
+    #current time 0700
+    #add current days images to folder
+    for cycle in ['A', 'B']:
+        camera.start_preview()
+        #set for consistant pictures
+        camera.iso = 100
+        time.sleep(2)
+        camera.shutter_speed = camera.exposure_speed
+        camera.exposure_mode = 'off'
+        g = camera.awb_gains
+        camera.awb_mode = 'off'
+        camera.awb_gains = g
+        #sleep till camera focused
+        time.sleep(8)
+        camera.capture(f'/home/pi/Desktop/AeroGarden/images/{day}_{cycle}_{datetime.datetime.now().time()}.jpg')
+        camera.stop_preview()
+        #wait 15hrs
+        time.sleep(53990)
+        #current time 2200
     
-    #get time for this
-    #--|
-    start_time = datetime.datetime.now()
+    #average code run length 2.34 seconds over 10 tests 
     #compile all images into a gif
     file_names = []
     for r, d, f in os.walk('images'):
@@ -79,9 +75,6 @@ for week in range(10):
     tweet = f"""TEST: My #AeroGarden progress from September 08 2020 until {today}"""
     
     tweet = api.update_with_media(filename = '/home/pi/Desktop/AeroGarden/movie.gif', status = tweet)
-    
-    end_time = datetime.datetime.now()
-    
-    code_times.append(end_time - start_time)
-    
+    #wait 6 hrs - the 2.34 seconds the code takes
+    time.sleep(21597.66)
     
